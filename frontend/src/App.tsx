@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css'; // Menggunakan gaya dari App.css
+import './App.css';
 
 function App() {
-  // State untuk menyimpan pesan yang diketik pengguna
   const [message, setMessage] = useState<string>('');
-  // State untuk menyimpan respons yang diterima dari AI
   const [aiResponse, setAiResponse] = useState<string>('Halo! Saya Asisten AI Anda. Apa yang bisa saya bantu?');
-  // State untuk menunjukkan status loading (saat menunggu jawaban AI)
+  // Loading menunggu jawaban dari Ai
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Fungsi yang dipanggil saat tombol 'Kirim' ditekan
+  // Fungsi dipanggil menekan tombol kirim
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Jika pesan kosong atau hanya spasi, jangan lakukan apa-apa
+  // Pesan koosong jangan melakukan apa-apa
     if (!message.trim()) return;
 
     setIsLoading(true);
-    setAiResponse(''); // Kosongkan respons sebelumnya
+    setAiResponse(''); 
 
     try {
-      // Mengirim pesan ke endpoint backend yang sudah kita buat (http://localhost:5000/api/chat)
+      //Mengirim pesan ke endpoint backend
       const response = await axios.post('http://localhost:5000/api/chat', { message });
       
       // Mengambil data respons dari backend
       setAiResponse(response.data.data);
-      setMessage(''); // Kosongkan input setelah pesan terkirim
+      setMessage(''); // Mengosongkan input setelah pesan terkirim
 
     } catch (error) {
       console.error('Error saat mengirim pesan:', error);

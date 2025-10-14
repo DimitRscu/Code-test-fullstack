@@ -1,7 +1,7 @@
 // Menggunakan library Google GenAI
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { GoogleGenAI } from '@google/genai'; // IMPORT INI MENGGANTIKAN OpenAI
+import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -18,8 +18,8 @@ app.use(cors({
 app.use(express.json());
 
 // Inisialisasi GoogleGenAI dengan kunci API dari .env
-const ai = new GoogleGenAI({ // Menggunakan 'ai' sebagai variabel, bukan 'openai'
-    apiKey: process.env.GEMINI_API_KEY, // Menggunakan GEMINI_API_KEY
+const ai = new GoogleGenAI({ // Menggunakan 'ai' sebagai variabel
+    apiKey: process.env.GEMINI_API_KEY, // GEMINI_API_KEY
 });
 
 // Endpoint API untuk chat
@@ -45,7 +45,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
     } catch (error) {
         // Tampilkan error spesifik di terminal backend untuk debugging
         console.error('Error saat memanggil API Gemini:', error);
-        // Kirim error generik ke frontend
+        // Kirim error ke frontend
         res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
     }
 });
