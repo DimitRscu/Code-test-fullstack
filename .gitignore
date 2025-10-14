@@ -1,0 +1,13 @@
+# Folders yang tidak perlu diunggah
+node_modules
+build
+dist
+.env
+
+# MacOS files
+.DS_Store
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
